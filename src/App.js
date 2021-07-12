@@ -4,25 +4,36 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Tweets from './Pages/Tweets';
 // TODO : MyPage, About 컴포넌트를 import 합니다.
+import About from './Pages/About';
+import MyPage from './Pages/MyPage';
 
 import './App.css';
+import { BrowserRouter,Switch,Route } from 'react-router-dom';
 
 const App = (props) => {
   return (
-    // <BrowserRouter>
+    <BrowserRouter>
       <div className="App">
         <main>
           <Sidebar />
           <section className="features">
-            {/* <Route exact path="/"> */}
+          <Switch>
+            <Route exact path="/">
               <Tweets />
-            {/* </Route> */}
+            </Route>
+            <Route path='/about'>
+              <About/>
+            </Route>
+            <Route path='/mypage'>
+              <MyPage />
+            </Route>
+          </Switch> 
             {/* TODO : 유어클래스를 참고해서, 테스트 케이스를 통과하세요.
-            TODO : React Router DOM 설치 후 BrowserRouter, Route의 주석을 해제하고 Swtich 컴포넌트를 적절하게 작성합니다. */}
+            // TODO : React Router DOM 설치 후 BrowserRouter, Route의 주석을 해제하고 Swtich 컴포넌트를 적절하게 작성합니다. */}
           </section>
         </main>
       </div>
-    // </BrowserRouter>
+  </BrowserRouter>
   );
 };
 
