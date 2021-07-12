@@ -9,20 +9,21 @@ import dummyTweets from '../static/dummyData';
 const Tweets = () => {
   // TODO : 새로 트윗을 작성하고 전송할 수 있게 useState를 적절히 활용하세요.
   const [트윗,트윗수정] = useState('')
-  const [유저,유저수정] = useState('')
+  const [유저,유저수정] = useState('parkhacker')
   const [더미,더미수정] = useState(dummyTweets)
   
   const handleButtonClick = (event) => {
     const tweet = {};
     // TODO : Tweet button 엘리먼트 클릭시 작동하는 함수를 완성하세요.
     // 트윗 전송이 가능하게 작성해야 합니다. 
-    tweet.id = dummyTweets.length+1
+    tweet.id = 더미.length+1
     tweet.username = 유저
     tweet.picture = `https://randomuser.me/api/portraits/men/98.jpg`
     tweet.content = 트윗
     tweet.createdAt = new Date().toLocaleDateString('ko-kr')
     tweet.updatedAt = new Date().toLocaleDateString('ko-kr')
-    더미수정(dummyTweets.unshift(tweet))
+    더미수정([tweet,...더미])
+    // dummyTweets.unshift(tweet)
   };
 
   const handleChangeUser = (event) => {
@@ -74,7 +75,7 @@ const Tweets = () => {
       <div className="tweet__selectUser"></div>
         {/* TODO : 하나의 트윗이 아니라, 주어진 트윗 목록(dummyTweets) 갯수에 맞게 보여줘야 합니다. */}
         <ul className="tweets" >
-        {dummyTweets.map((tweet) => {   
+        {[...더미].map((tweet) => {   
           return (            
               <Tweet tweet={tweet} key={tweet.id}/>
               )})
