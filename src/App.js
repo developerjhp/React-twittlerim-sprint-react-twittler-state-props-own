@@ -6,11 +6,14 @@ import Tweets from './Pages/Tweets';
 // TODO : MyPage, About 컴포넌트를 import 합니다.
 import About from './Pages/About';
 import MyPage from './Pages/MyPage';
+import dummyTweets from './static/dummyData';
+import { useState } from 'react';
 
 import './App.css';
 import { BrowserRouter,Switch,Route } from 'react-router-dom';
 
 const App = (props) => {
+  const [더미,더미수정] = useState(dummyTweets)
   return (
     <BrowserRouter>
       <div className="App">
@@ -19,13 +22,13 @@ const App = (props) => {
           <section className="features">
           <Switch>
             <Route exact path="/">
-              <Tweets />
+              <Tweets 더미={더미} 더미수정={더미수정}/>
             </Route>
             <Route path='/about'>
               <About/>
             </Route>
             <Route path='/mypage'>
-              <MyPage />
+              <MyPage 더미={더미} 더미수정={더미수정}/>
             </Route>
           </Switch> 
             {/* TODO : 유어클래스를 참고해서, 테스트 케이스를 통과하세요.

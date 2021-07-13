@@ -100,7 +100,7 @@
 .tweet__selectUser {
   display: flex;
   flex-direction: row;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .tweet__selectUser > button {
@@ -126,4 +126,9 @@
   font-size: 0.8rem;
   padding: 0.1rem;
   border-radius: 50px;
+}
+
+.tweet_select {
+  margin-bottom: 8px;
+  margin-right : 270px
 }

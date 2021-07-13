@@ -6,24 +6,28 @@ import './Tweets.css';
 import dummyTweets from '../static/dummyData';
 
 
-const Tweets = () => {
+
+const Tweets = (props) => {
   // TODO : 새로 트윗을 작성하고 전송할 수 있게 useState를 적절히 활용하세요.
   const [트윗,트윗수정] = useState('')
   const [유저,유저수정] = useState('parkhacker')
-  const [더미,더미수정] = useState(dummyTweets)
+  // const [더미,더미수정] = useState(dummyTweets)
+  const [choice,setChoice] = useState('')
+  {console.log(choice)}
   
+
   const handleButtonClick = (event) => {
     const tweet = {};
     // TODO : Tweet button 엘리먼트 클릭시 작동하는 함수를 완성하세요.
     // 트윗 전송이 가능하게 작성해야 합니다. 
-    tweet.id = 더미.length+1
+    tweet.id = props.더미.length+1
     tweet.username = 유저
     tweet.picture = `https://randomuser.me/api/portraits/men/98.jpg`
     tweet.content = 트윗
     tweet.createdAt = new Date().toLocaleDateString('ko-kr')
     tweet.updatedAt = new Date().toLocaleDateString('ko-kr')
-    더미수정([tweet,...더미])
-    // dummyTweets.unshift(tweet)
+    props.더미수정([tweet,...props.더미])
+    // 더미수정(dummyTweets.unshift(tweet))
   };
 
   const handleChangeUser = (event) => {
@@ -35,6 +39,22 @@ const Tweets = () => {
     // TODO : Tweet textarea 엘리먼트에 입력 시 작동하는 함수를 완성하세요.
     트윗수정(event.target.value)
   };
+
+
+  const options = [...props.더미].map((e) => {
+    return <option value={e.username} key={e.id}>{e.username}</option>
+  })
+
+  const handleUsername = (event) => {
+    setChoice(event.target.value)
+  }
+
+  let setfilter = props.더미.filter( (el)=> el.username === choice )
+  // if(choice === )  
+  if(choice === '-- click to filter tweets by username --' || choice === ''){
+    setfilter = [...props.더미]
+  }
+
 
   return (
     <React.Fragment>
@@ -60,7 +80,7 @@ const Tweets = () => {
               <div className="tweetForm__count" role="status">
                 <span className="tweetForm__count__text">
                   {/* TODO : 트윗 총 개수를 보여줄 수 있는 Counter를 작성하세요. */}
-                  {'total: ' + dummyTweets.length}
+                  {'total: ' + props.더미.length}
                 </span>
               </div>
             </div>
@@ -73,11 +93,17 @@ const Tweets = () => {
         </div>
       </div>
       <div className="tweet__selectUser"></div>
+        <select className='tweet_select'value={choice} onChange={handleUsername}>
+        <option >-- click to filter tweets by username --</option>
+          {options}
+          {console.log(choice)}
+          </select>
         {/* TODO : 하나의 트윗이 아니라, 주어진 트윗 목록(dummyTweets) 갯수에 맞게 보여줘야 합니다. */}
         <ul className="tweets" >
-        {[...더미].map((tweet) => {   
+          
+        {setfilter.map((tweet) => {   
           return (            
-              <Tweet tweet={tweet} key={tweet.id}/>
+              <Tweet tweet={tweet} key={tweet.id} />
               )})
           }
           </ul>

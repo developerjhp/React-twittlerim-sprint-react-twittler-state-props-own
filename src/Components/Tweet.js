@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Tweet.css';
 
 const Tweet = ({ tweet }) => {
   const parsedDate = new Date(tweet.createdAt).toLocaleDateString('ko-kr');
-
+  const [a,b] = useState('tweet')
+  const handle = (event) => {
+      b('tweet hide')
+    
+  }
+  
   return (
-    <li className="tweet" id={tweet.id}>
+    <li className="tweet" className={a} id={tweet.id}>
       <div className="tweet__profile">
         <img src={tweet.picture} />
       </div>
@@ -17,6 +22,7 @@ const Tweet = ({ tweet }) => {
             <span className='tweet__createdAt'>{parsedDate}</span>
             {/* TODO : 트윗 생성 일자가 있어야 합니다. parsedDate를 이용하세요. */}
           </div>
+          <button className='not' value={tweet.id} onClick={handle}><i className="fa fa-trash-alt"></i></button>
         </div>
         <div className="tweet__message">{tweet.content}</div>
       </div>
